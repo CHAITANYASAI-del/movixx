@@ -1,107 +1,180 @@
 @import "../../../../mixins.scss";
 
-.heroBanner{
-    width:100%;
-    height:450px;
-    background-color: var(--black);
-    display: flex;
-    align-items: center;
-    position: relative;
-    @include md {
-        height: 700px;
-    }
-    .backdrop-img{
+.heroBanner {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  background-color: var(--black);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  @include md {
+    height: 700px;
+  }
+
+  .backdrop-img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+    overflow: hidden;
+
+    .lazy-load-image-background {
+      width: 100%;
+      height: 100%;
+
+      img {
         width: 100%;
         height: 100%;
-        position: absolute;
-        top:0;
-        left: 0;
-        opacity: 0.5;
-        overflow: hidden;
-        .lazy-load-image-background{
-            width: 100%;
-            height: 100%;
-            img{
-                width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            }
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+
+  .opacity-layer {
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(180deg, rgba(4, 21, 45, 0) 0%, #04152d 79.17%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .heroBannerContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    .title {
+      font-size: 50px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      position: relative;
+      color: white; // Set text color to white
+      text-shadow: 0 0 20px rgba(202, 103, 253, 0.8); // Outer glow
+      animation: netflix_style 3.5s linear forwards, // Apply animation once and stop
+                 welcome_static 3.5s linear forwards 3.5s; // Static after animation
+
+      @include md {
+        font-size: 90px;
+      }
+    }
+
+    .subTitle {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 40px;
+
+      @include md {
+        font-size: 24px;
+      }
+    }
+
+    .searchInput {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 600px;
+
+      input {
+        flex: 1;
+        height: 50px;
+        background-color: #fff;
+        outline: 0;
+        border: 0;
+        border-radius: 30px 0 0 30px;
+        padding: 0 15px;
+        font-size: 14px;
+
+        @include md {
+          height: 60px;
+          padding: 0 30px;
+          font-size: 20px;
         }
-    }
-    .opacity-layer{
-        width: 100%;
-        height:250px;
-        background: linear-gradient (180deg, rgba(4,21,45,0)0%, #04152d 79.17%);
-        position: absolute;
-        bottom: 0;
-        left: 0;
-    }
-    .heroBannerContent{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+      }
+
+      button {
+        width: 100px;
+        height: 50px;
+        background: var(--gradient);
         color: white;
-        text-align: center;
-        position: relative;
-        max-width: 800px;
-        margin: 0 auto;
-        .title{
-            font-size: 50px;
-            font-weight: 700;
-        margin-bottom: 10px;
-            @include md{
-                margin-bottom: 0;
-                font-size: 90px;
-            }
+        outline: 0;
+        border: 0;
+        border-radius: 0 30px 30px 0;
+        font-size: 16px;
+        cursor: pointer;
+
+        @include md {
+          width: 150px;
+          height: 60px;
+          font-size: 18px;
         }
-        .subTitle{
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 40px;
-            @include md {
-                font-size: 24px;
-            }
-        }
-        .searchInput{
-            display: flex;
-            align-items: center;
-            width: 100%;
-            input{
-                width:calc(100% - 100px);
-                height: 50px;
-                background-color: #fff
-                ;
-                outline: 0;
-                border:0;
-                border-radius:30px 0 0 30px;
-                padding:0 15px;
-                font-size: 14px;
-                @include md {
-                    width: calc(100% - 150px);
-                    height:60px;
-                    padding: 0 30px;
-                    font-size: 20px;
-                }
-                
-            }
-            button{
-                width: 100px;
-                height: 50px;
-                background: var(--gradient);
-                color:white;
-                outline:0;
-                border: 0;
-                border-radius: 0 30px 30px 0;
-                font-size: 16px;
-                cursor: pointer;
-                @include md {
-                    width: 150px;
-                    height: 60px;
-                    font-size: 18px;
-                }
-            }
-        }
+      }
     }
-   
+  }
+
+  /* Animation keyframes for title */
+  @keyframes netflix_style {
+    0% {
+      text-shadow: 0 0 20px rgba(202, 103, 253, 0.8);
+      transform: scale(1.5, 1.5);
+    }
+    10% {
+      text-shadow: 0 0 25px rgba(202, 103, 253, 0.8);
+      transform: scale(1.5, 1.5);
+    }
+    15% {
+      color: #f3f3f3;
+    }
+    20% {
+      color: white;
+      text-shadow: none;
+      transform: scale(1.1, 1.1);
+    }
+    75% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 0;
+      transform: scale(0.85, 0.9);
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Static keyframes for title after animation */
+  @keyframes welcome_static {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  // Function for creating long shadows
+  @function makelongshadow($length, $angle) {
+    $val: 0px 0px transparent;
+    @for $i from 1 through $length {
+      $val: #{$val}, #{$i}px #{$i * $angle}px #aaa;
+    }
+    @return $val;
+  }
 }
